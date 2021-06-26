@@ -7,27 +7,27 @@ env:
   TERM: xterm-256color
 
 jobs:
-  test:
-    strategy:
-      fail-fast: false
-      matrix:
-        # apparently these are interpreted as floats, so we have to wrap them in quotes
-        PYTHON_VERSION: ["3.6", "3.7", "3.8", "3.9", "3.10"]
-    name: Test against Python ${{ matrix.PYTHON_VERSION }}
-    runs-on: ubuntu-18.04
-    env:
-      PYTHON: python${{ matrix.PYTHON_VERSION }}
-    steps:
-      - name: Install Python ${{ matrix.PYTHON_VERSION }}
-        run: |
-          sudo add-apt-repository ppa:deadsnakes/ppa
-          sudo apt-get update
-          sudo apt-get install -y --no-install-recommends \
-              python${{ matrix.PYTHON_VERSION }}-minimal \
-              python${{ matrix.PYTHON_VERSION }}-venv
-      - uses: actions/checkout@v2
-      - name: Build example projects
-        run: bash -xe ci/build-example-projects.sh
+#  test:
+#    strategy:
+#      fail-fast: false
+#      matrix:
+#        # apparently these are interpreted as floats, so we have to wrap them in quotes
+#        PYTHON_VERSION: ["3.6", "3.7", "3.8", "3.9", "3.10"]
+#    name: Test against Python ${{ matrix.PYTHON_VERSION }}
+#    runs-on: ubuntu-18.04
+#    env:
+#      PYTHON: python${{ matrix.PYTHON_VERSION }}
+#    steps:
+#      - name: Install Python ${{ matrix.PYTHON_VERSION }}
+#        run: |
+#          sudo add-apt-repository ppa:deadsnakes/ppa
+#          sudo apt-get update
+#          sudo apt-get install -y --no-install-recommends \
+#              python${{ matrix.PYTHON_VERSION }}-minimal \
+#              python${{ matrix.PYTHON_VERSION }}-venv
+#      - uses: actions/checkout@v2
+#      - name: Build example projects
+#        run: bash -xe ci/build-example-projects.sh
 
   appimage:
     strategy:
@@ -52,7 +52,7 @@ jobs:
     name: Create release and upload artifacts
     runs-on: ubuntu-18.04
     needs:
-      - test
+      #- test
       - appimage
     steps:
       - name: Download artifacts
