@@ -11,7 +11,7 @@ from . import BashScriptGenerator, AppImageBuildScriptGenerator, PrePostBuildScr
 class AllBuildScriptsGenerator:
     def __init__(self, config: dict, project_root_dir: str, builder_name: str):
         self._config = config
-        
+
         self._project_root_dir = project_root_dir
         self._builder_name = builder_name
 
@@ -109,7 +109,7 @@ class AllBuildScriptsGenerator:
         main_script_gen.add_lines([
             "",
             "# call post-build script (if available)",
-            "[ -f post_build.sh ] && (source post_build.sh)",
+            "[ -f post_build.sh ] && source post_build.sh",
             "",
         ])
 
